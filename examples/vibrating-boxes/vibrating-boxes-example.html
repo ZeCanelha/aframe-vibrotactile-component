@@ -1,0 +1,61 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
+    <script src="../../dist/aframe-vibrotactile-component.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.0.0/dist/aframe-environment-component.min.js"></script>
+    <title>A-Frame Vibrotactile Component - Vibrating Boxes</title>
+</head>
+
+<body>
+
+    <a-scene physics>
+        <a-entity position="2 0 4" rotation="0 20 0">
+            <a-camera id="cam" look-controls="pointerLockEnabled: true">
+                <a-cursor></a-cursor>
+            </a-camera>
+        </a-entity>
+
+        <a-sky radius="10" color="#329ea8"></a-sky>
+
+        <a-plane scale="10 10 1" rotation="-90 0 0" material="color: #212121" static-body></a-plane>
+
+        <a-box vibrotactile="src: /vibrations/vibration1.json; event: click" material="color: red" position="0 2 -1"
+            animation__click="startEvents: click; property: position; to: 0.05 2 -1; dur: 100; loop: 10; easing: linear;">
+            <a-entity position="0 1 0" text="value: Click in the box!; wrapCount: 15; align: center;"
+                material="color: red" geometry="primitive: plane; width: auto; height: 0.5;">
+            </a-entity>
+
+        </a-box>
+
+        <!-- On hover -->
+
+        <a-box vibrotactile="src:/vibrations/vibration2.json; event: mouseenter" material="color: green"
+            position="2 0.5 -1"
+            animation__mouseenter="property: components.material.material.color; type: color; to: blue; startEvents: mouseenter; dur: 500; easing: linear;"
+            ;
+            animation__mouseleave="property: components.material.material.color; type: color; to: green; startEvents: mouseleave; dur: 500; easing: linear;"
+            ;>
+            <a-entity position="0 1 0" text="value: Hover me!; wrapCount: 15; align: center;" material="color: green"
+                geometry="primitive: plane; width: auto; height: 0.5;">
+            </a-entity>
+        </a-box>
+
+        <!-- On colide -->
+        <a-box vibrotactile="src:/vibrations/vibration3.json; event: physicscollided" material="color: blue"
+            position="-2 0.5 -1" static-body event-set__col="_event: collide; material.color:#FFAA00 "></a-box>
+        <a-sphere dynamic-body grabbable material="color: #FFAA00" position="-2 0.25 1" radius="0.25"></a-sphere>
+
+
+    </a-scene>
+
+</body>
+
+</html>

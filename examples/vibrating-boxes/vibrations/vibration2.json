@@ -1,0 +1,21 @@
+{
+    "samplingRate": 10,
+    "numberOfActuators": 6,
+    "channels": [
+        {
+            "patterns": [
+                {
+                    "ramp": {
+                        "initialIntensity": 20,
+                        "finalIntensity": 100
+                    },
+                    "startingTime": 0,
+                    "duration": 1000
+                }
+            ],
+            "actuators": [
+                1,2,3,4,5,6
+            ]
+        }
+    ]
+}

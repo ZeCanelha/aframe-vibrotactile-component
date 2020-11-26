@@ -1,0 +1,77 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
+    <script src="walking-example.js"></script>
+
+    <script src="../../dist/aframe-vibrotactile-component.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.0.0/dist/aframe-environment-component.min.js"></script>
+    <title>A-Frame Vibrotactile Component - Walking </title>
+</head>
+
+<body>
+    <a-scene physics>
+        <!-- Assets Managment System -->
+        <a-assets>
+            <img id="woodNRM" src="textures/wood/Wood_Herringbone_Tiles_002_normal.jpg">
+            <img id="wood" src="textures/wood/Wood_Herringbone_Tiles_002_basecolor.jpg">
+
+            <img id="sand" src="textures/sand/Sand_007_basecolor.jpg">
+            <img id="sandNRM" src="textures/sand/Sand_007_normal.jpg">
+
+            <img id="stone" src="textures/stone/Wall_Stone_017_BaseColor.jpg">
+            <img id="stoneNRM" src="textures/stone/Wall_Stone_017_Normal.jpg">
+
+        </a-assets>
+
+        <!-- Entity to access vibrate componente -->
+        <a-entity vibrotactile walking></a-entity>
+
+        <a-sky color="#34b1eb" radius="24"></a-sky>
+
+        <a-entity id="cam" camera look-controls="pointerLockEnabled: true" wasd-controls="acceleration: 100;"
+            position="0 1.7 4">
+            <a-cursor></a-cursor>
+        </a-entity>
+
+
+        <a-plane id="sandGround"
+            material="color: #FFFFFF; src: #sand; repeat: 5 5; normal-map: #sandNRM; normal-texture-repeat: 5 5"
+            position="-6 0 0" rotation="-90 0 0" scale="12 12 1">
+        </a-plane>
+        <a-box position="-6 2.5 0" color="#edcd6d">
+            <a-entity look-at="#cam" position="0 1 0" text="value: Sand; color: #000000; align: center; wrap-count: 8"
+                geometry="primitive: plane; width: auto; height: 0.5;" material="color: #edcd6d"></a-entity>
+        </a-box>
+
+
+        <a-plane material="color: #FFFFFF; src: #stone; repeat: 4 4; normal-map: #stoneNRM; normal-texture-repeat: 4 4"
+            id="concretGround" position="6 0 0" rotation="-90 0 0" scale="12 12 1">
+        </a-plane>
+        <a-box position="6 2.5 0" color="#c2c0bc">
+            <a-entity look-at="#cam" position="0 1 0"
+                text="value: Concret; color: #000000; align: center; wrap-count: 8"
+                geometry="primitive: plane; width: auto; height: 0.5;" material="color: #c2c0bc"></a-entity>
+        </a-box>
+
+
+        <a-plane id="woodGround"
+            material="color: #FFFFFF; src: #wood; repeat: 4 4; normal-map: #woodNRM; normal-texture-repeat: 4 4"
+            position="0 0 -12" rotation="-90 0 0" scale="12 12 1">
+        </a-plane>
+        <a-box position="0 2.5 -12" color="#e6a119">
+            <a-entity look-at="#cam" position="0 1 0" text="value: Wood; color: #000000; align: center; wrap-count: 8"
+                geometry="primitive: plane; width: auto; height: 0.5;" material="color: #e6a119"></a-entity>
+        </a-box>
+
+    </a-scene>
+</body>
+
+</html>
