@@ -15,7 +15,17 @@ For [A-Frame](https://aframe.io).
 | event        | A-Frame Event                 | none          |
 | samplingRate | Sampling rate in milliseconds | 5             |
 
-### vibrotactile.sin
+Common Parameters of the following available functions.
+
+| Property          | Description                                     | Default Value |
+| ----------------- | ----------------------------------------------- | ------------- |
+| samplingRate      | Sampling rate in milliseconds                   | 5             |
+| numberOfActuators | Number of actuators                             | 6             |
+| actuators         | The specific actuators to perform the vibration | none          |
+| startingTime      | Time in milliseconds to start the vibration     | 0             |
+| duration          | Duration of the vibration in milliconds         | 1000          |
+
+### vibrotactile.sin(amplitude, frequency, phase, actuators, startingTime, duration, samplingRate, numberOfActuators)
 
 | Property  | Description                       | Default Value |
 | --------- | --------------------------------- | ------------- |
@@ -23,12 +33,18 @@ For [A-Frame](https://aframe.io).
 | frequency | Sin frequency value               | 5             |
 | phase     | Sin phase value                   | 0             |
 
-### vibrotactile.ramp
+### vibrotactile.ramp(initialIntensity, finalIntensity, actuators, startingTime, duration, samplingRate, numberOfActuators )
 
 | Property         | Description                               | Default Value |
 | ---------------- | ----------------------------------------- | ------------- |
 | initialIntensity | Initial vibration intensity value [0,100] | none          |
 | finalIntensity   | Final vibration intensity value [0,100]   | none          |
+
+### vibrotactile.vibrations(vibrations, samplingRate, numberOfActuators)
+
+| Property   | Description                                                                                | Type                | Example                                                            |
+| ---------- | ------------------------------------------------------------------------------------------ | ------------------- | ------------------------------------------------------------------ |
+| vibrations | Custom vibration intensity for a given actuator(s) during a time period ( in milliseconds) | Array of **Object** | { intensity: 50; actuators: [1,2]; startingTime: 0; duration: 500} |
 
 ### Installation
 
