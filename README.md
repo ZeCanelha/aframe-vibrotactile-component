@@ -15,7 +15,7 @@ For [A-Frame](https://aframe.io).
 | event        | A-Frame Event                 | none          |
 | samplingRate | Sampling rate in milliseconds | 5             |
 
-Common Parameters of the following available functions.
+Common parameters of the following available functions.
 
 | Property          | Description                                     | Default Value |
 | ----------------- | ----------------------------------------------- | ------------- |
@@ -25,7 +25,7 @@ Common Parameters of the following available functions.
 | startingTime      | Time in milliseconds to start the vibration     | 0             |
 | duration          | Duration of the vibration in milliconds         | 1000          |
 
-### vibrotactile.sin(amplitude, frequency, phase, actuators, startingTime, duration, samplingRate, numberOfActuators)
+### vibrotactile.sin(amplitude, frequency, phase, ...common paremeters)
 
 | Property  | Description                       | Default Value |
 | --------- | --------------------------------- | ------------- |
@@ -33,7 +33,7 @@ Common Parameters of the following available functions.
 | frequency | Sin frequency value               | 5             |
 | phase     | Sin phase value                   | 0             |
 
-### vibrotactile.ramp(initialIntensity, finalIntensity, actuators, startingTime, duration, samplingRate, numberOfActuators )
+### vibrotactile.ramp(initialIntensity, finalIntensity, ...common paremeters )
 
 | Property         | Description                               | Default Value |
 | ---------------- | ----------------------------------------- | ------------- |
