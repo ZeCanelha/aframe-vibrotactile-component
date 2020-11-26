@@ -7,12 +7,28 @@ A-Frame component for vibratactile feedback
 
 For [A-Frame](https://aframe.io).
 
-### API
+### vibrotactile
 
-| Property | Description | Default Value |
-| src | Path to vibration file | none |
-| event | A-Frame Event | none |
-| samplingRate | Sampling rate in milliseconds | 5 |
+| Property     | Description                   | Default Value |
+| ------------ | ----------------------------- | ------------- |
+| src          | Path to vibration file        | none          |
+| event        | A-Frame Event                 | none          |
+| samplingRate | Sampling rate in milliseconds | 5             |
+
+### vibrotactile.sin
+
+| Property  | Description                       | Default Value |
+| --------- | --------------------------------- | ------------- |
+| amplitude | Sin amplitude value between [0,1] | 1             |
+| frequency | Sin frequency value               | 5             |
+| phase     | Sin phase value                   | 0             |
+
+### vibrotactile.ramp
+
+| Property         | Description                               | Default Value |
+| ---------------- | ----------------------------------------- | ------------- |
+| initialIntensity | Initial vibration intensity value [0,100] | none          |
+| finalIntensity   | Final vibration intensity value [0,100]   | none          |
 
 ### Installation
 
