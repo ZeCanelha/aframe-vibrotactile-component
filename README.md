@@ -23,7 +23,7 @@ Basic usage example:
 </a-scene>
 ```
 
-See more examples in the [examples](examples/vibrating-boxes) folder.
+See more examples in the [examples](examples/vibrating-boxes/vibrating-boxes-example.html) folder.
 
 The vibrotactile component also offers a set of preset functions that can be used programmatically by the user.
 For simplicity and, to avoid reiteration of parameter descriptions, the following table describes the common parameters between the **sin** and **ramp** functions.
@@ -46,25 +46,51 @@ For simplicity and, to avoid reiteration of parameter descriptions, the followin
 | sin.phase     | Sin phase value                   | 0             |
 | options       | Common parameters                 | {}            |
 
-### vibrotactile.ramp(initialIntensity, finalIntensity, options )
+### vibrotactile.ramp(initialIntensity, finalIntensity, options ) | Property
 
-| Property         | Description                               | Default Value |
-| ---------------- | ----------------------------------------- | ------------- |
-| initialIntensity | Initial vibration intensity value [0,100] | none          |
-| finalIntensity   | Final vibration intensity value [0,100]   | none          |
-| options          | Common parameters                         | -             |
+| Description | Default Value | | ---------------- |
+----------------------------------------- | ------------- | | initialIntensity |
+Initial vibration intensity value [0,100] | none | | finalIntensity | Final
+vibration intensity value [0,100] | none | | options | Common parameters | - |
 
-### vibrotactile.customVibrations(vibrations, samplingRate, numberOfActuators)
+### vibrotactile.customVibrations(vibrations, samplingRate, numberOfActuators) |
 
-| Property   | Description                                                                                | Type                | Example                                                            |
-| ---------- | ------------------------------------------------------------------------------------------ | ------------------- | ------------------------------------------------------------------ |
-| vibrations | Custom vibration intensity for a given actuator(s) during a time period ( in milliseconds) | Array of **Object** | { intensity: 50; actuators: [1,2]; startingTime: 0; duration: 500} |
+| Property                         | Description                             | Default Value |                                        | ----------------------- |
+| -------------------------------- | --------------------------------------- | ------------- | -------------------------------------- | ----------------------- | --- | --- |
+| -------------                    |                                         | vibrations    | Custom vibration intensity for a given |
+| actuator(s) during a time period | {}                                      |               | vibrations.intensity                   | Vibration               |
+| intensity                        | -                                       |               | vibrations.actuators                   | Vibration actuators     | -   |     |
+| vibrations.startingTime          | Vibration starting time in milliseconds | -             |                                        |
+| vibrations.duration              | Vibration duration in milliseconds      | -             | ### Installation                       |
 
-### Installation
+Basic usage example:
 
-#### Browser
+```html
+<head>
+  <title>Vibrotactile Component- Examples</title>
+  <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-vibrotactile-component@1.0.0/dist/aframe-vibrotactile-component.min.js"></script>
+  <script>
+    AFRAME.registerComponent("vibrotactile-example", {
+      init: function () {
+        var sinArgs = { ... }
+        var options = { ... }
+        var vibrotactile = this.el.components.vibrotactile;
+        vibrotactile.sin(sinArgs, options);
+      },
+    });
+  </script>
+</head>
+<body>
+  <a-scene>
+    <a-entity vibrotactile vibrotactile-examples></a-entity>
+  </a-scene>
+</body>
+```
 
-Install and use by directly including the [browser files](dist):
+See more [examples](examples/walking/walking-example.js).
+
+#### Browser Install and use by directly including the [browser files](dist):
 
 ```html
 <head>
