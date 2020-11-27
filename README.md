@@ -46,22 +46,23 @@ For simplicity and, to avoid reiteration of parameter descriptions, the followin
 | sin.phase     | Sin phase value                   | 0             |
 | options       | Common parameters                 | {}            |
 
-### vibrotactile.ramp(initialIntensity, finalIntensity, options ) | Property
+### vibrotactile.ramp(initialIntensity, finalIntensity, options )
 
-| Description | Default Value | | ---------------- |
------------------------------------------ | ------------- | | initialIntensity |
-Initial vibration intensity value [0,100] | none | | finalIntensity | Final
-vibration intensity value [0,100] | none | | options | Common parameters | - |
+| Property         | Description                               | Default Value |
+| ---------------- | ----------------------------------------- | ------------- |
+| initialIntensity | Initial vibration intensity value [0,100] | none          |
+| finalIntensity   | Final vibration intensity value [0,100]   | none          |
+| options          | Common parameters                         | -             |
 
-### vibrotactile.customVibrations(vibrations, samplingRate, numberOfActuators) |
+### vibrotactile.customVibrations(vibrations, samplingRate, numberOfActuators)
 
-| Property                         | Description                             | Default Value |                                        | ----------------------- |
-| -------------------------------- | --------------------------------------- | ------------- | -------------------------------------- | ----------------------- | --- | --- |
-| -------------                    |                                         | vibrations    | Custom vibration intensity for a given |
-| actuator(s) during a time period | {}                                      |               | vibrations.intensity                   | Vibration               |
-| intensity                        | -                                       |               | vibrations.actuators                   | Vibration actuators     | -   |     |
-| vibrations.startingTime          | Vibration starting time in milliseconds | -             |                                        |
-| vibrations.duration              | Vibration duration in milliseconds      | -             | ### Installation                       |
+| Property                | Description                                                             | Default Value |
+| ----------------------- | ----------------------------------------------------------------------- | ------------- |
+| vibrations              | Custom vibration intensity for a given actuator(s) during a time period | {}            |
+| vibrations.intensity    | Vibration intensity                                                     | -             |
+| vibrations.actuators    | Vibration actuators                                                     | -             |
+| vibrations.startingTime | Vibration starting time in milliseconds                                 | -             |
+| vibrations.duration     | Vibration duration in milliseconds                                      | -             |
 
 Basic usage example:
 
@@ -89,6 +90,8 @@ Basic usage example:
 ```
 
 See more [examples](examples/walking/walking-example.js).
+
+### Installation
 
 #### Browser Install and use by directly including the [browser files](dist):
 
