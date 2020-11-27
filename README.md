@@ -54,6 +54,12 @@ For simplicity and, to avoid reiteration of parameter descriptions, the followin
 | finalIntensity   | Final vibration intensity value [0,100]   | none          |
 | options          | Common parameters                         | -             |
 
+### vibrotactile.sendVibrations(vibrations)
+
+| Property   | Description                                                                                                            | Default Value |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------- | ------------- |
+| vibrations | If no parameter is specified, the object used will be the one defined when the component is initialized, if it exists. | none          |
+
 ### vibrotactile.customVibrations(vibrations, samplingRate, numberOfActuators)
 
 | Property                | Description                                                             | Default Value |
