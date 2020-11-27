@@ -12,13 +12,20 @@ if (typeof AFRAME === "undefined") {
 
 const BASE_URL = "http://localhost:3003/api";
 const ENDPOINT = "/vibrate";
-const DEFAULT_VIBRATION = 5;
+const DEFAULT_SAMPLING_RATE = 5;
+const DEFAULT_NUMBER_OF_ACTUATORS = 6;
+const DEFAULT_ACTUATORS = [0, 1, 2, 3, 4, 5];
+const DEFAULT_STARTING_TIME = 0;
+const DEFAULT_DURATION = 1000;
+const DEFAULT_AMPLITUDE = 1;
+const DEFAULT_FREQUENCY = 5;
+const DEFAULT_PHASE = 0;
 
 AFRAME.registerComponent("vibrotactile", {
   schema: {
     src: { type: "string" },
     event: { type: "string" },
-    samplingRate: { type: "number", default: DEFAULT_VIBRATION },
+    samplingRate: { type: "number", default: DEFAULT_SAMPLING_RATE },
   },
 
   /**
@@ -31,11 +38,16 @@ AFRAME.registerComponent("vibrotactile", {
    */
   init: function () {
     var self = this;
-    this.vibrationHandler = function () {
-      var vibrationPatternPath = self.data.src;
-      self.loadVibrationsByURL(vibrationPatternPath).then((vibrations) => {
-        self.sendVibrations(vibrations);
+    this.vibrations = {};
+
+    if (this.data.src) {
+      this.vibrations = this.loadVibrationsByURL(this.data.src).then((data) => {
+        return data;
       });
+    }
+
+    this.vibrationHandler = function () {
+      self.sendVibrations(self.vibrations);
     };
   },
 
@@ -50,6 +62,13 @@ AFRAME.registerComponent("vibrotactile", {
     // "event updated": Remove the previous event listener if it exists
     if (oldData.event && data.event !== oldData.event) {
       el.removeEventListener(oldData.event, this.vibrationHandler);
+    }
+
+    // updated vibration file
+    if (oldData.src && data.src !== oldData.src) {
+      this.vibrations = this.loadVibrationsByURL(data.src).then((data) => {
+        return data;
+      });
     }
 
     if (data.event) {
@@ -72,30 +91,6 @@ AFRAME.registerComponent("vibrotactile", {
     }
   },
 
-  /**
-   * Called on each scene tick.
-   */
-  // tick: function (t) { },
-
-  /**
-   * Called when entity pauses.
-   * Use to stop or remove any dynamic or background behavior such as events.
-   */
-  pause: function () {},
-
-  /**
-   * Called when entity resumes.
-   * Use to continue or add any dynamic or background behavior such as events.
-   */
-  play: function () {},
-
-  /**
-   * Event handlers that automatically get attached or detached based on scene state.
-   */
-  events: {
-    // click: function (evt) { }
-  },
-
   loadVibrationsByURL: async function (path) {
     try {
       let response = await fetch(path);
@@ -105,7 +100,8 @@ AFRAME.registerComponent("vibrotactile", {
     }
   },
 
-  sendVibrations: function (vibrations) {
+  sendVibrations: function () {
+    vibrations = arguments[0] || this.vibrations;
     fetch(BASE_URL + ENDPOINT, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
@@ -123,33 +119,28 @@ AFRAME.registerComponent("vibrotactile", {
 
   /**
    *
-   * @param {*} intensities Intensity values for each specified actuator
-   * @param {*} actuators Actuators where the vibration will occur
-   * @param {*} startingTime Time in milliseconds to start the vibration
-   * @param {*} duration Duration of the vibration
+   * @param {*} vibrations Custom vibration intensity for a given actuator(s) during a time period
    * @param {*} samplingRate Sampling rate
    * @param {*} numberOfActuators Number of total actuators
    */
 
-  customVibration: function (
-    intensities,
-    startingTime,
-    duration,
+  customVibrations: function (
+    vibrations,
     samplingRate = 5,
     numberOfActuators = 6
   ) {
-    let channel = [];
-    console.log(intensities);
-    intensities.forEach((element) => {
-      let datapoints = [];
-      let pattern = [];
+    var channel = [];
+
+    vibrations.forEach((element) => {
+      var datapoints = [];
+      var pattern = [];
       datapoints.push({ time: 0, intensity: element.intensity });
-      datapoints.push({ time: duration, intensity: element.intensity });
+      datapoints.push({ time: element.duration, intensity: element.intensity });
 
       const patternData = {
         datapoints: datapoints,
-        startingTime: startingTime,
-        duration: duration,
+        startingTime: element.startingTime,
+        duration: element.duration,
       };
 
       pattern.push(patternData);
@@ -169,26 +160,25 @@ AFRAME.registerComponent("vibrotactile", {
    *
    * @param {*} amplitude Sin amplitude value
    * @param {*} frequency Sin frequency value
-   * @param {*} phase Sin phase value
-   * @param {*} actuators Actuators where the vibration will occur
-   * @param {*} startingTime Time in milliseconds to start the vibration
-   * @param {*} duration Duration of the vibration
-   * @param {*} samplingRate Sampling rate
-   * @param {*} numberOfActuators Number of total actuators
+   * @param {*} options Common parameters
    */
 
-  sin: function (
-    amplitude = 1,
-    frequency,
-    phase = 0,
-    actuators,
-    startingTime,
-    duration,
-    samplingRate = 5,
-    numberOfActuators = 6
-  ) {
-    let channel = [];
-    let pattern = [];
+  sin: function (sin, options) {
+    var options = options || {};
+    var actuators = options.actuators || DEFAULT_ACTUATORS;
+    var startingTime = options.startingTime || DEFAULT_STARTING_TIME;
+    var duration = options.duration || DEFAULT_DURATION;
+    var samplingRate = options.samplingRate || DEFAULT_SAMPLING_RATE;
+    var numberOfActuators =
+      options.numberOfActuators || DEFAULT_NUMBER_OF_ACTUATORS;
+
+    var sin = sin || {};
+    var amplitude = sin.amplitude || DEFAULT_AMPLITUDE;
+    var frequency = sin.frequency || DEFAULT_FREQUENCY;
+    var phase = sin.phase || DEFAULT_PHASE;
+
+    var channel = [];
+    var pattern = [];
 
     const sinVibration = {
       frequency: frequency,
@@ -217,24 +207,20 @@ AFRAME.registerComponent("vibrotactile", {
    *
    * @param {*} initialIntensity Initial vibration intensity value
    * @param {*} finalIntensity Final vibration intensity value
-   * @param {*} actuators Actuators where the vibration will occur
-   * @param {*} startingTime Time in milliseconds to start the vibration
-   * @param {*} duration Duration of the vibration
-   * @param {*} samplingRate Sampling Rate
-   * @param {*} numberOfActuators Number of total actuators
+   * @param {*} options Common parameters
    */
 
-  ramp: function (
-    initialIntensity,
-    finalIntensity,
-    actuators,
-    startingTime,
-    duration,
-    samplingRate = 5,
-    numberOfActuators = 6
-  ) {
-    let channel = [];
-    let pattern = [];
+  ramp: function (initialIntensity, finalIntensity, options) {
+    var options = options || {};
+    var actuators = options.actuators || DEFAULT_ACTUATORS;
+    var startingTime = options.startingTime || DEFAULT_STARTING_TIME;
+    var duration = options.duration || DEFAULT_DURATION;
+    var samplingRate = options.samplingRate || DEFAULT_SAMPLING_RATE;
+    var numberOfActuators =
+      options.numberOfActuators || DEFAULT_NUMBER_OF_ACTUATORS;
+
+    var channel = [];
+    var pattern = [];
 
     const rampVibrations = {
       initialIntensity: initialIntensity,

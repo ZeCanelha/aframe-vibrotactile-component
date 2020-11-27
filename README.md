@@ -12,35 +12,49 @@ For [A-Frame](https://aframe.io).
 | Property     | Description                   | Default Value |
 | ------------ | ----------------------------- | ------------- |
 | src          | Path to vibration file        | none          |
-| event        | A-Frame Event                 | none          |
+| event        | A-Frame event                 | none          |
 | samplingRate | Sampling rate in milliseconds | 5             |
 
-Common parameters of the following available functions.
+Basic usage example:
+
+```html
+<a-scene>
+  <a-box vibrotactile="src: vibrations.json; event: mouseenter;"></a-box>
+</a-scene>
+```
+
+See more examples in the [examples](examples/vibrating-boxes) folder.
+
+The vibrotactile component also offers a set of preset functions that can be used programmatically by the user.
+For simplicity and, to avoid reiteration of parameter descriptions, the following table describes the common parameters between the **sin** and **ramp** functions.
 
 | Property          | Description                                     | Default Value |
 | ----------------- | ----------------------------------------------- | ------------- |
 | samplingRate      | Sampling rate in milliseconds                   | 5             |
 | numberOfActuators | Number of actuators                             | 6             |
-| actuators         | The specific actuators to perform the vibration | none          |
+| actuators         | The specific actuators to perform the vibration | [0,1,2,3,4,5] |
 | startingTime      | Time in milliseconds to start the vibration     | 0             |
 | duration          | Duration of the vibration in milliconds         | 1000          |
 
-### vibrotactile.sin(amplitude, frequency, phase, ...common paremeters)
+### vibrotactile.sin(sin, options)
 
-| Property  | Description                       | Default Value |
-| --------- | --------------------------------- | ------------- |
-| amplitude | Sin amplitude value between [0,1] | 1             |
-| frequency | Sin frequency value               | 5             |
-| phase     | Sin phase value                   | 0             |
+| Property      | Description                       | Default Value |
+| ------------- | --------------------------------- | ------------- |
+| sin           | Sin properties                    | {}            |
+| sin.amplitude | Sin amplitude value between [0,1] | 1             |
+| sin.frequency | Sin frequency value               | 5             |
+| sin.phase     | Sin phase value                   | 0             |
+| options       | Common parameters                 | {}            |
 
-### vibrotactile.ramp(initialIntensity, finalIntensity, ...common paremeters )
+### vibrotactile.ramp(initialIntensity, finalIntensity, options )
 
 | Property         | Description                               | Default Value |
 | ---------------- | ----------------------------------------- | ------------- |
 | initialIntensity | Initial vibration intensity value [0,100] | none          |
 | finalIntensity   | Final vibration intensity value [0,100]   | none          |
+| options          | Common parameters                         | -             |
 
-### vibrotactile.vibrations(vibrations, samplingRate, numberOfActuators)
+### vibrotactile.customVibrations(vibrations, samplingRate, numberOfActuators)
 
 | Property   | Description                                                                                | Type                | Example                                                            |
 | ---------- | ------------------------------------------------------------------------------------------ | ------------------- | ------------------------------------------------------------------ |

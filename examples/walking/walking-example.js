@@ -67,54 +67,34 @@ AFRAME.registerComponent("walking", {
   },
 
   sendVibration: function () {
-    const numberOfActuators = 6;
-    let samplingRate = 5;
-    let actuators = [];
-    let startingTime = 0;
-    let duration = 1000;
-
+    const commomParameters = {
+      samplingRate: 10,
+      actuators: [0, 1, 2],
+    };
     switch (this.currentGround) {
       case WOOD_GROUND:
         const initialIntensity = 0;
         const finalIntensity = 100;
-        actuators.push(1);
         this.vibrotactile.ramp(
           initialIntensity,
           finalIntensity,
-          actuators,
-          startingTime,
-          duration,
-          samplingRate,
-          numberOfActuators
+          commomParameters
         );
         break;
       case SAND_GROUND:
-        const amplitude = 1;
-        const frequency = 5;
-        const phase = 0;
-        actuators.push(2);
-        this.vibrotactile.sin(
-          amplitude,
-          frequency,
-          phase,
-          actuators,
-          startingTime,
-          duration,
-          samplingRate,
-          numberOfActuators
-        );
+        const sin = { frequency: 10 };
+        this.vibrotactile.sin(sin, commomParameters);
         break;
       case CONCRETE_GROUND:
-        const customVibration = { actuators: [1, 2], intensity: 50 };
         let vibrations = [];
+        const customVibration = {
+          actuators: [1, 2],
+          intensity: 50,
+          startingTime: 0,
+          duration: 1000,
+        };
         vibrations.push(customVibration);
-        this.vibrotactile.customVibration(
-          vibrations,
-          startingTime,
-          duration,
-          samplingRate,
-          numberOfActuators
-        );
+        this.vibrotactile.customVibrations(vibrations);
         break;
       default:
         break;
