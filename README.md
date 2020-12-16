@@ -3,17 +3,16 @@
 [![Version](http://img.shields.io/npm/v/aframe-vibrotactile-component.svg?style=flat-square)](https://npmjs.org/package/aframe-vibrotactile-component)
 [![License](http://img.shields.io/npm/l/aframe-vibrotactile-component.svg?style=flat-square)](https://npmjs.org/package/aframe-vibrotactile-component)
 
-A-Frame component for vibratactile feedback
+A-Frame component for vibrotactile feedback
 
 For [A-Frame](https://aframe.io).
 
 ### vibrotactile
 
-| Property     | Description                   | Default Value |
-| ------------ | ----------------------------- | ------------- |
-| src          | Path to vibration file        | none          |
-| event        | A-Frame event                 | none          |
-| samplingRate | Sampling rate in milliseconds | 5             |
+| Property | Description            | Default Value |
+| -------- | ---------------------- | ------------- |
+| src      | Path to vibration file | none          |
+| event    | A-Frame event          | none          |
 
 Basic usage example:
 
@@ -34,7 +33,7 @@ For simplicity and, to avoid reiteration of parameter descriptions, the followin
 | numberOfActuators | Number of actuators                             | 6             |
 | actuators         | The specific actuators to perform the vibration | [0,1,2,3,4,5] |
 | startingTime      | Time in milliseconds to start the vibration     | 0             |
-| duration          | Duration of the vibration in milliconds         | 1000          |
+| duration          | Duration of the vibration in milliseconds       | 1000          |
 
 ### vibrotactile.sin(sin, options)
 
@@ -80,8 +79,17 @@ Basic usage example:
   <script>
     AFRAME.registerComponent("vibrotactile-example", {
       init: function () {
-        var sinArgs = { ... }
-        var options = { ... }
+        var sinArgs = {
+          amplitude: 0.8,
+          frequency: 10,
+        };
+        var options = {
+          samplingRate: 10,
+          actuators: [0,1]
+          numberOfActuators: 6,
+          startingTime: 0,
+          duration: 1500,
+        };
         var vibrotactile = this.el.components.vibrotactile;
         vibrotactile.sin(sinArgs, options);
       },

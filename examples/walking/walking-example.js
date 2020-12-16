@@ -7,7 +7,7 @@ AFRAME.registerComponent("walking", {
     // Do something when component first attached.
     this.sand = document.querySelector("#sandGround");
     this.wood = document.querySelector("#woodGround");
-    this.concrete = document.querySelector("#concretGround");
+    this.concrete = document.querySelector("#concreteGround");
     this.cam = document.querySelector("#cam");
 
     this.vibrotactile = this.el.components.vibrotactile;
@@ -67,7 +67,7 @@ AFRAME.registerComponent("walking", {
   },
 
   sendVibration: function () {
-    const commomParameters = {
+    const commonParameters = {
       samplingRate: 10,
       actuators: [0, 1, 2],
     };
@@ -78,12 +78,12 @@ AFRAME.registerComponent("walking", {
         this.vibrotactile.ramp(
           initialIntensity,
           finalIntensity,
-          commomParameters
+          commonParameters
         );
         break;
       case SAND_GROUND:
         const sin = { frequency: 10 };
-        this.vibrotactile.sin(sin, commomParameters);
+        this.vibrotactile.sin(sin, commonParameters);
         break;
       case CONCRETE_GROUND:
         let vibrations = [];

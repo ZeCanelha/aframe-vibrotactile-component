@@ -18,7 +18,7 @@
 
 <body>
     <a-scene physics>
-        <!-- Assets Managment System -->
+        <!-- Assets Management System -->
         <a-assets>
             <img id="woodNRM" src="textures/wood/Wood_Herringbone_Tiles_002_normal.jpg">
             <img id="wood" src="textures/wood/Wood_Herringbone_Tiles_002_basecolor.jpg">
@@ -31,7 +31,7 @@
 
         </a-assets>
 
-        <!-- Entity to access vibrate componente -->
+        <!-- Entity to access vibrate component -->
         <a-entity vibrotactile walking></a-entity>
 
         <a-sky color="#34b1eb" radius="24"></a-sky>
@@ -53,11 +53,11 @@
 
 
         <a-plane material="color: #FFFFFF; src: #stone; repeat: 4 4; normal-map: #stoneNRM; normal-texture-repeat: 4 4"
-            id="concretGround" position="6 0 0" rotation="-90 0 0" scale="12 12 1">
+            id="concreteGround" position="6 0 0" rotation="-90 0 0" scale="12 12 1">
         </a-plane>
         <a-box position="6 2.5 0" color="#c2c0bc">
             <a-entity look-at="#cam" position="0 1 0"
-                text="value: Concret; color: #000000; align: center; wrap-count: 8"
+                text="value: Concrete; color: #000000; align: center; wrap-count: 8"
                 geometry="primitive: plane; width: auto; height: 0.5;" material="color: #c2c0bc"></a-entity>
         </a-box>
 
