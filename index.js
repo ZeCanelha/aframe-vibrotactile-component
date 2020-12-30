@@ -20,6 +20,8 @@ const DEFAULT_DURATION = 1000;
 const DEFAULT_AMPLITUDE = 1;
 const DEFAULT_FREQUENCY = 5;
 const DEFAULT_PHASE = 0;
+const DEFAULT_INITIAL_INTENSITY = 0;
+const DEFAULT_FINAL_INTENSITY = 100;
 
 AFRAME.registerComponent("vibrotactile", {
   schema: {
@@ -119,9 +121,9 @@ AFRAME.registerComponent("vibrotactile", {
 
   /**
    *
-   * @param {*} vibrations Custom vibration intensity for a given actuator(s) during a time period
-   * @param {*} samplingRate Sampling rate
-   * @param {*} numberOfActuators Number of total actuators
+   * @param {Object} vibrations Custom vibration intensity for a given actuator(s) during a time period
+   * @param {Number} samplingRate Sampling rate
+   * @param {Number} numberOfActuators Number of total actuators
    */
 
   customVibrations: function (
@@ -157,10 +159,10 @@ AFRAME.registerComponent("vibrotactile", {
   },
 
   /**
-   *
-   * @param {*} amplitude Sin amplitude value
-   * @param {*} frequency Sin frequency value
-   * @param {*} options Common parameters
+   * @param {Object} sin  Sin properties
+   * @param {Number} sin.amplitude Sin amplitude value
+   * @param {Number} sin.frequency Sin frequency value
+   * @param {Number} sin.options Common parameters
    */
 
   sin: function (sin, options) {
@@ -205,19 +207,24 @@ AFRAME.registerComponent("vibrotactile", {
 
   /**
    *
-   * @param {*} initialIntensity Initial vibration intensity value
-   * @param {*} finalIntensity Final vibration intensity value
-   * @param {*} options Common parameters
+   * @param {Object} ramp - Ramp function intensity values
+   * @param {Number} ramp.initialIntensity Initial vibration intensity value
+   * @param {Number} ramp.finalIntensity Final vibration intensity value
+   * @param {Object} options Common parameters
    */
 
-  ramp: function (initialIntensity, finalIntensity, options) {
+  ramp: function (ramp, options) {
     var options = options || {};
+    var ramp = ramp || {};
     var actuators = options.actuators || DEFAULT_ACTUATORS;
     var startingTime = options.startingTime || DEFAULT_STARTING_TIME;
     var duration = options.duration || DEFAULT_DURATION;
     var samplingRate = options.samplingRate || DEFAULT_SAMPLING_RATE;
     var numberOfActuators =
       options.numberOfActuators || DEFAULT_NUMBER_OF_ACTUATORS;
+
+    var initialIntensity = ramp.initialIntensity || DEFAULT_INITIAL_INTENSITY;
+    var finalIntensity = ramp.finalIntensity || DEFAULT_FINAL_INTENSITY;
 
     var channel = [];
     var pattern = [];
