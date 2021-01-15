@@ -177,7 +177,7 @@ The customVibrations function allows the construction of elaborated vibrations, 
 
 | Property               | Description                                           | Default Value |
 | ---------------------- | ----------------------------------------------------- | ------------- |
-| vibrations             | JavaScript object containing the vibration properties |               |
+| vibrations             | Array of `Object` object containing the vibration properties |               |
 | vibration.intensity    | Vibration intensity                                   | -             |
 | vibration.actuators    | Array of `Number` indicating the actuators            | -             |
 | vibration.startingTime | Vibration starting time in milliseconds               | -             |
