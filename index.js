@@ -23,11 +23,17 @@ const DEFAULT_PHASE = 0;
 const DEFAULT_INITIAL_INTENSITY = 0;
 const DEFAULT_FINAL_INTENSITY = 100;
 
+const LOGGER = {
+  WARNING_FILE: "Warning: No vibration file specified.",
+  WARNING_EVENT: "Warning: No event associated.",
+  ERROR_LOADING:
+    "Error: Could not load the vibration file. Check your path for errors.",
+};
+
 AFRAME.registerComponent("vibrotactile", {
   schema: {
     src: { type: "string" },
     event: { type: "string" },
-    samplingRate: { type: "number", default: DEFAULT_SAMPLING_RATE },
   },
 
   /**
@@ -40,12 +46,9 @@ AFRAME.registerComponent("vibrotactile", {
    */
   init: function () {
     var self = this;
-    this.vibrations = {};
 
     if (this.data.src) {
-      this.vibrations = this.loadVibrationsByURL(this.data.src).then((data) => {
-        return data;
-      });
+      this.vibrations = this.loadVibrationsByURL(this.data.src);
     }
 
     this.vibrationHandler = function () {
@@ -76,7 +79,10 @@ AFRAME.registerComponent("vibrotactile", {
     if (data.event) {
       el.addEventListener(data.event, this.vibrationHandler);
     } else {
-      console.log("No event associated");
+      console.log(LOGGER.WARNING_EVENT);
+    }
+    if (!data.src) {
+      console.log(LOGGER.WARNING_FILE);
     }
   },
 
@@ -94,12 +100,16 @@ AFRAME.registerComponent("vibrotactile", {
   },
 
   loadVibrationsByURL: async function (path) {
-    try {
-      let response = await fetch(path);
-      return await response.json();
-    } catch (error) {
-      return error;
+    const response = await fetch(path);
+    if (!response.ok) {
+      throw new Error(LOGGER.ERROR_LOADING);
+    } else {
+      console.log(
+        "Vibrations from " + this.data.src + " attached with success"
+      );
     }
+    const body = await response.json();
+    return body;
   },
 
   sendVibrations: function () {

@@ -151,7 +151,7 @@ Example:
     AFRAME.registerComponent("vibrotactile-example", {
       init: function () {
         var waveVibration = "path/to/waveVibrationFile.json";
-        var vibrotactile = this.el.components.vibrotactile;
+        var vibrotactile = document.querySelector(#box).components.vibrotactile;
 
         // Sends the vibrations specified at the src property
         vibrotactile.sendVibrations();
@@ -164,6 +164,7 @@ Example:
 <body>
   <a-scene>
     <a-box
+      id="box"
       vibrotactile="src: path/to/vibrationFile.json; event:mouseenter"
     ></a-box>
   </a-scene>
@@ -178,7 +179,7 @@ The customVibrations function allows the construction of elaborated vibrations, 
 | ---------------------- | ----------------------------------------------------- | ------------- |
 | vibrations             | JavaScript object containing the vibration properties |               |
 | vibration.intensity    | Vibration intensity                                   | -             |
-| vibration.actuators    | Vibration actuators                                   | -             |
+| vibration.actuators    | Array of `Number` indicating the actuators            | -             |
 | vibration.startingTime | Vibration starting time in milliseconds               | -             |
 | vibration.duration     | Vibration duration in milliseconds                    | -             |
 
