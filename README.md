@@ -47,7 +47,7 @@ The sin function allows to create a **sinusoidal waveform** vibration.
 
 | Property      | Description                                            | Default Value      |
 | ------------- | ------------------------------------------------------ | ------------------ |
-| sin           | A JavaScrip object containing the sine wave properties |                    |
+| sin           | JavaScript `Object` containing the sine wave properties |                    |
 | sin.amplitude | Sine amplitude value between [0,1]                     | `1 `               |
 | sin.frequency | Sine frequency value                                   | `5`                |
 | sin.phase     | Sine phase value                                       | `0`                |
@@ -93,7 +93,7 @@ The ramp function allows to create a single sawtooth wave, a **ramp waveform** v
 
 | Property              | Description                                             | Default Value      |
 | --------------------- | ------------------------------------------------------- | ------------------ |
-| ramp                  | A JavaScript object containing the ramp wave properties |                    |
+| ramp                  | JavaScript `Object` containing the ramp wave properties |                    |
 | ramp.initialIntensity | Initial vibration intensity value [0,100]               | `0`                |
 | ramp.finalIntensity   | Final vibration intensity value [0,100]                 | `100`              |
 | options               | Common parameters                                       | [options](#common) |
@@ -177,7 +177,7 @@ The customVibrations function allows the construction of elaborated vibrations, 
 
 | Property               | Description                                           | Default Value |
 | ---------------------- | ----------------------------------------------------- | ------------- |
-| vibrations             | Array of `Object` object containing the vibration properties |               |
+| vibrations             | Array of vibration `Object` containing the vibration properties |               |
 | vibration.intensity    | Vibration intensity                                   | -             |
 | vibration.actuators    | Array of `Number` indicating the actuators            | -             |
 | vibration.startingTime | Vibration starting time in milliseconds               | -             |
