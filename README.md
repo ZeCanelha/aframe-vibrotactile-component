@@ -9,7 +9,7 @@ For [A-Frame](https://aframe.io).
 
 ### vibrotactile {#vibrotactile}
 
-When creating the **vibrotactile** component for A-Frame, we pass as an argument a file exported from [Vibrotactile Editor](https://github.com/ZeCanelha/VibrotactileEditor. Briefly, this editor allows to create and export a set of vibrotactile sensations, which we refer in this documentation as the vibration file.
+When creating the **vibrotactile** component for A-Frame, we pass as an argument a file exported from [Vibrotactile Editor](https://github.com/ZeCanelha/VibrotactileEditor). Briefly, this editor allows to create and export a set of vibrotactile sensations, which we refer in this documentation as the vibration file.
 
 <!-- Falar sobre a estrutra do ficheiro ? -->
 
